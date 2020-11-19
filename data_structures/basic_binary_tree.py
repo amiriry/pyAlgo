@@ -51,11 +51,28 @@ def usage():
     print("\tManually:\npython3 basic_binary_tree.py\n   After running choose the amount of nodes or randomly with \'r\'")
     print("\tInside the command: basic_binary_tree r\n   This will choose the number of nodes and each value randomly ")
 
+def isint(i):
+    try:
+        int(i)
+        return True
+    except ValueError:
+        return False
+
 def main() -> None:
-    if argv[1] == "help":
+    if (len(argv) > 1):
+        if argv[1] == "help":
+            usage()
+            exit(0)
+        elif argv[1] == "r" or argv[1] == "random":
+            number_of_nodes = randint(0,100)
+        elif isint(argv[1]):
+            number_of_nodes = int(argv[1])
+        else:
+            usage()
+            exit(1)
+    else:
         usage()
-        exit(0)
-    number_of_nodes = int(input("Number of nodes you want in the tree:"))
+        exit(2)
     tree = Node(randint(0,100))
     for i in range(1, number_of_nodes):
             tree.insert(randint(0,100))
